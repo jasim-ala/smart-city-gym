@@ -1,8 +1,100 @@
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "motion/react";
 import { useRef, useState, useEffect, MouseEvent } from "react";
-import { Shield, Zap, TrendingUp, ChevronDown, Dumbbell, Mail, Phone, MapPin, Clock, Star, Target, Activity, ChevronLeft, ChevronRight } from "lucide-react";
+import { Shield, Zap, TrendingUp, ChevronDown, Dumbbell, Mail, Phone, MapPin, Clock, Star, Target, Activity, ChevronLeft, ChevronRight, Languages } from "lucide-react";
 
-const ThreeDHero = () => {
+const translations = {
+    en: {
+        brand: "SMART CITY GYM",
+        tagline: "LADIES & GENTS",
+        coach: "COACH: SHARAFU",
+        motto: "CHANGE YOUR LIFESTYLE",
+        join: "Join Now",
+        training: "Training",
+        pricing: "Pricing",
+        schedule: "Schedule",
+        contact: "Contact",
+        services: "Services",
+        facility: "Facility",
+        swipe: "Manual Gallery Control",
+        weight: "Weight Management",
+        weightDesc: "Expert weight gaining and loss programs tailored to your body type.",
+        cardio: "Cardio & Aerobics",
+        cardioDesc: "High-intensity group aerobics and cardio training for maximum endurance.",
+        bodybuilding: "Body Building",
+        bodybuildingDesc: "Professional muscle building and competition training for elite performance.",
+        pt: "Personal Training",
+        ptDesc: "Certified trainers providing one-on-one sessions at gym, home, or park.",
+        membership: "Membership Plans",
+        specialChallenge: "Special Challenge",
+        bellyChallenge: "3 Months Belly Removing Challenge Available Now!",
+        popular: "Most Popular",
+        couplePackage: "Special Couple Package",
+        coupleDesc: "Available for all durations. Transform together.",
+        workingHours: "Working Hours",
+        mixed: "MIXED",
+        ladiesTime: "Ladies Special Time",
+        monSat: "Monday to Saturday",
+        sunday: "Sunday",
+        morning: "Morning Session",
+        evening: "Evening Session",
+        openHours: "Open Hours",
+        getInTouch: "GET IN TOUCH.",
+        support: "Instant Support",
+        supportDesc: "The fastest way to join or ask questions is via WhatsApp.",
+        chat: "Chat on WhatsApp",
+        location: "Tower A1, City Tower, Al Nuaimia 3, Ajman-UAE",
+        arBrand: "سمارت سيتي جيم"
+    },
+    ar: {
+        brand: "سمارت سيتي جيم",
+        tagline: "للسيدات والرجال",
+        coach: "المدرب: شرفو",
+        motto: "غير أسلوب حياتك",
+        join: "انضم الآن",
+        training: "التدريب",
+        pricing: "الأسعار",
+        schedule: "الجدول",
+        contact: "اتصل بنا",
+        services: "خدماتنا",
+        facility: "المرفق",
+        swipe: "التحكم اليدوي في المعرض",
+        weight: "إدارة الوزن",
+        weightDesc: "برامج متخصصة لزيادة الوزن وإنقاصه مصممة حسب نوع جسمك وأهدافك.",
+        cardio: "كارديو وأيروبيكس",
+        cardioDesc: "تمارين أيروبيكس جماعية وكارديو عالية الكثافة لأقصى قدر من التحمل.",
+        bodybuilding: "بناء الأجسام",
+        bodybuildingDesc: "بناء عضلات احترافي وتدريب للمسابقات لأداء النخبة.",
+        pt: "تدريب شخصي",
+        ptDesc: "مدربون معتمدون يقدمون جلسات فردية في الجيم أو المنزل أو الحديقة.",
+        membership: "خطط العضوية",
+        specialChallenge: "تحدي خاص",
+        bellyChallenge: "تحدي إزالة الكرش لمدة 3 أشهر متاح الآن!",
+        popular: "الأكثر طلباً",
+        couplePackage: "باقة الأزواج الخاصة",
+        coupleDesc: "متاحة لجميع الفترات. تحولوا معاً.",
+        workingHours: "ساعات العمل",
+        mixed: "مختلط",
+        ladiesTime: "وقت خاص للسيدات",
+        monSat: "من الاثنين إلى السبت",
+        sunday: "الأحد",
+        morning: "الفترة الصباحية",
+        evening: "الفترة المسائية",
+        openHours: "ساعات العمل",
+        getInTouch: "تواصل معنا",
+        support: "الدعم الفوري",
+        supportDesc: "أسرع طريقة للانضمام أو طرح الأسئلة هي عبر الواتساب.",
+        chat: "تحدث معنا عبر الواتساب",
+        location: "برج A1، سيتي تاور، النعيمية 3، عجمان - الإمارات",
+        arBrand: "سمارت سيتي جيم"
+    }
+};
+
+interface LangProps {
+    lang: 'en' | 'ar';
+}
+
+const ThreeDHero = ({ lang }: LangProps) => {
+    const t = translations[lang];
   const containerRef = useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -142,12 +234,12 @@ const ThreeDHero = () => {
                     transition={{ delay: 1 }}
                     className="flex flex-col items-center gap-2 mb-6"
                 >
-                    <span className="font-mono text-primary tracking-[0.5em] text-sm md:text-lg">
-                        LADIES & GENTS
+                    <span className="font-mono text-primary tracking-[0.5em] text-sm md:text-lg uppercase">
+                        {t.tagline}
                     </span>
                     <div className="h-[1px] w-12 bg-primary/30" />
                     <span className="font-sans text-white/40 text-xs tracking-[0.3em] uppercase">
-                        COACH: SHARAFU
+                        {t.coach}
                     </span>
                 </motion.div>
                 <motion.p 
@@ -156,7 +248,7 @@ const ThreeDHero = () => {
                     transition={{ delay: 1.2 }}
                     className="text-2xl md:text-4xl font-display font-light text-white/60 uppercase tracking-[0.3em]"
                 >
-                    CHANGE YOUR LIFESTYLE
+                    {t.motto}
                 </motion.p>
             </div>
           </motion.div>
@@ -220,19 +312,20 @@ const TrainingBackground = () => {
     );
 };
 
-const Features = () => {
+const Features = ({ lang }: LangProps) => {
+    const t = translations[lang];
     return (
         <section id="services" className="py-24 px-6 bg-black">
             <div className="max-w-7xl mx-auto mb-16 text-center">
-                <h2 className="text-4xl md:text-6xl font-bold mb-4 uppercase">Our <span className="text-primary italic">Services</span></h2>
+                <h2 className="text-4xl md:text-6xl font-bold mb-4 uppercase">{lang === 'en' ? 'Our' : ''} <span className="text-primary italic">{t.services}</span></h2>
                 <div className="w-24 h-1 bg-primary mx-auto" />
             </div>
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { icon: <TrendingUp className="text-primary" />, title: "Weight Management", desc: "Expert weight gaining and loss programs tailored to your body type and goals." },
-                    { icon: <Zap className="text-primary" />, title: "Cardio & Aerobics", desc: "High-intensity group aerobics and cardio training for maximum endurance." },
-                    { icon: <Dumbbell className="text-primary" />, title: "Body Building", desc: "Professional muscle building and competition training for elite performance." },
-                    { icon: <Star className="text-primary" />, title: "Personal Training", desc: "Certified trainers providing one-on-one sessions at gym, home, or park." }
+                    { icon: <TrendingUp className="text-primary" />, title: t.weight, desc: t.weightDesc },
+                    { icon: <Zap className="text-primary" />, title: t.cardio, desc: t.cardioDesc },
+                    { icon: <Dumbbell className="text-primary" />, title: t.bodybuilding, desc: t.bodybuildingDesc },
+                    { icon: <Star className="text-primary" />, title: t.pt, desc: t.ptDesc }
                 ].map((f, i) => (
                     <motion.div 
                         key={i}
@@ -278,31 +371,32 @@ const Features = () => {
     );
 }
 
-const PricingSection = () => {
+const PricingSection = ({ lang }: LangProps) => {
+    const t = translations[lang];
     const prices = [
-        { period: "One Day", price: "20", sub: "AED" },
-        { period: "One Month", price: "125", sub: "AED" },
-        { period: "Two Months", price: "230", sub: "AED" },
-        { period: "Three Months", price: "325", sub: "AED", popular: true },
-        { period: "Six Months", price: "540", sub: "AED" },
-        { period: "One Year", price: "900", sub: "AED" },
+        { period: lang === 'en' ? "One Day" : "يوم واحد", price: "20", sub: "AED" },
+        { period: lang === 'en' ? "One Month" : "شهر واحد", price: "125", sub: "AED" },
+        { period: lang === 'en' ? "Two Months" : "شهران", price: "230", sub: "AED" },
+        { period: lang === 'en' ? "Three Months" : "3 أشهر", price: "325", sub: "AED", popular: true },
+        { period: lang === 'en' ? "Six Months" : "6 أشهر", price: "540", sub: "AED" },
+        { period: lang === 'en' ? "One Year" : "سنة واحدة", price: "900", sub: "AED" },
     ];
 
     return (
         <section id="pricing" className="py-24 px-6 bg-black relative">
             <div className="max-w-7xl mx-auto">
                 <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
-                    <div>
-                        <h2 className="text-4xl md:text-7xl font-bold uppercase mb-4">Membership <br/><span className="text-primary italic">Plans</span></h2>
-                        <div className="w-24 h-1 bg-primary" />
+                    <div className={lang === 'ar' ? 'text-right md:order-last' : ''}>
+                        <h2 className="text-4xl md:text-7xl font-bold uppercase mb-4">{t.membership.split(' ')[0]} <br/><span className="text-primary italic">{t.membership.split(' ')[1] || ''} {t.membership.split(' ')[2] || ''}</span></h2>
+                        <div className={`w-24 h-1 bg-primary ${lang === 'ar' ? 'mr-0 ml-auto' : ''}`} />
                     </div>
                     <div className="bg-primary/10 border border-primary/20 p-6 rounded-2xl max-w-sm">
-                        <div className="flex items-center gap-2 mb-2 text-primary">
+                        <div className={`flex items-center gap-2 mb-2 text-primary ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                             <Zap size={20} className="fill-primary" />
-                            <span className="font-bold uppercase tracking-wider text-sm">Special Challenge</span>
+                            <span className="font-bold uppercase tracking-wider text-sm">{t.specialChallenge}</span>
                         </div>
-                        <p className="text-white font-bold text-lg uppercase leading-tight">
-                            3 Months Belly Removing Challenge Available Now!
+                        <p className={`text-white font-bold text-lg uppercase leading-tight ${lang === 'ar' ? 'text-right' : ''}`}>
+                            {t.bellyChallenge}
                         </p>
                     </div>
                 </div>
@@ -314,42 +408,42 @@ const PricingSection = () => {
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
                             transition={{ delay: i * 0.1 }}
-                            className={`relative p-8 rounded-3xl border ${p.popular ? 'border-primary bg-primary/5' : 'border-white/10 bg-white/5'} group overflow-hidden`}
+                            className={`relative p-8 rounded-3xl border ${p.popular ? 'border-primary bg-primary/5' : 'border-white/10 bg-white/5'} group overflow-hidden ${lang === 'ar' ? 'text-right' : ''}`}
                         >
                             {p.popular && (
-                                <div className="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-widest">
-                                    Most Popular
+                                <div className={`absolute top-0 ${lang === 'en' ? 'right-0 rounded-bl-xl' : 'left-0 rounded-br-xl'} bg-primary text-black text-[10px] font-bold px-4 py-1 uppercase tracking-widest`}>
+                                    {t.popular}
                                 </div>
                             )}
                             <div className="mb-8">
                                 <span className="block text-white/40 text-sm uppercase tracking-widest mb-2 font-mono">{p.period}</span>
-                                <div className="flex items-baseline gap-2">
+                                <div className={`flex items-baseline gap-2 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                     <span className="text-5xl font-bold">{p.price}</span>
                                     <span className="text-primary font-bold uppercase">{p.sub}</span>
                                 </div>
                             </div>
                             <ul className="space-y-4 mb-8 text-sm text-white/60">
-                                <li className="flex items-center gap-3">
+                                <li className={`flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                     <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                                    Full Gym Access
+                                    {lang === 'en' ? 'Full Gym Access' : 'دخول كامل للجيم'}
                                 </li>
-                                <li className="flex items-center gap-3">
+                                <li className={`flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                     <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                                    Ladies & Gents Mixed
+                                    {lang === 'en' ? 'Ladies & Gents Mixed' : 'مختلط سيدات ورجال'}
                                 </li>
-                                <li className="flex items-center gap-3">
+                                <li className={`flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                     <div className="w-1.5 h-1.5 rounded-full bg-primary" />
-                                    Personal Training Option
+                                    {lang === 'en' ? 'Personal Training Option' : 'خيار التدريب الشخصي'}
                                 </li>
                             </ul>
                         </motion.div>
                     ))}
                 </div>
 
-                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-r from-primary to-primary/60 text-black flex flex-col md:flex-row items-center justify-between gap-8">
-                    <div>
-                        <h3 className="text-3xl font-bold uppercase mb-2">Special Couple Package</h3>
-                        <p className="font-medium opacity-80 uppercase tracking-wide">Available for all durations. Transform together.</p>
+                <div className={`mt-12 p-8 rounded-3xl bg-gradient-to-r from-primary to-primary/60 text-black flex flex-col md:flex-row items-center justify-between gap-8 ${lang === 'ar' ? 'md:flex-row-reverse' : ''}`}>
+                    <div className={lang === 'ar' ? 'text-right' : ''}>
+                        <h3 className="text-3xl font-bold uppercase mb-2">{t.couplePackage}</h3>
+                        <p className="font-medium opacity-80 uppercase tracking-wide">{t.coupleDesc}</p>
                     </div>
                     <Star size={48} className="opacity-20 hidden md:block" />
                 </div>
@@ -358,50 +452,59 @@ const PricingSection = () => {
     );
 };
 
-const ScheduleSection = () => {
+const ScheduleSection = ({ lang }: LangProps) => {
+    const t = translations[lang];
     return (
         <section id="schedule" className="py-24 px-6 bg-zinc-950 relative overflow-hidden">
-            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
-                <div className="flex-1">
-                    <h2 className="text-4xl md:text-6xl font-bold uppercase mb-8">Working <br/><span className="text-primary italic">Hours</span></h2>
-                    <p className="text-white/40 mb-12 max-w-md uppercase tracking-widest text-sm leading-relaxed">
-                        Flexible timings designed to fit your busy lifestyle, including dedicated ladies-only hours for privacy and comfort.
+            <div className={`max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center ${lang === 'ar' ? 'lg:flex-row-reverse' : ''}`}>
+                <div className={`flex-1 ${lang === 'ar' ? 'text-right' : ''}`}>
+                    <h2 className="text-4xl md:text-6xl font-bold uppercase mb-8">{t.workingHours.split(' ')[0]} <br/><span className="text-primary italic">{t.workingHours.split(' ')[1] || ''}</span></h2>
+                    <p className={`text-white/40 mb-12 max-w-md uppercase tracking-widest text-sm leading-relaxed ${lang === 'ar' ? 'mr-auto ml-0' : ''}`}>
+                        {lang === 'en' 
+                            ? 'Flexible timings designed to fit your busy lifestyle, including dedicated ladies-only hours for privacy and comfort.'
+                            : 'توقيتات مرنة مصممة لتناسب أسلوب حياتك المزدحم، بما في ذلك ساعات مخصصة للسيدات فقط للخصوصية والراحة.'}
                     </p>
                     
                     <div className="space-y-6">
                         <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                            <h4 className="text-primary font-bold uppercase tracking-widest mb-4 flex items-center gap-3">
-                                <Clock size={18} /> Monday to Saturday
+                            <h4 className={`text-primary font-bold uppercase tracking-widest mb-4 flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                <Clock size={18} /> {t.monSat}
                             </h4>
-                            <div className="space-y-4">
-                                <div className="flex justify-between items-center pb-4 border-b border-white/5">
-                                    <span className="text-white/60">Morning Session</span>
-                                    <span className="font-bold">06.00 AM - 12.00 PM <span className="text-[10px] text-primary/60 ml-2">(MIXED)</span></span>
+                            <div className="space-y-4 font-sans">
+                                <div className={`flex justify-between items-center pb-4 border-b border-white/5 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    <span className="text-white/60">{t.morning}</span>
+                                    <span className={`font-bold ${lang === 'ar' ? 'flex flex-row-reverse gap-2' : ''}`}>
+                                        06.00 AM - 12.00 PM 
+                                        <span className={`text-[10px] text-primary/60 ${lang === 'en' ? 'ml-2' : 'mr-2'}`}>({t.mixed})</span>
+                                    </span>
                                 </div>
-                                <div className="flex justify-between items-center pb-4 border-b border-white/5">
-                                    <span className="text-primary">Ladies Special Time</span>
-                                    <span className="font-bold text-primary">12.00 PM - 03.00 PM</span>
+                                <div className={`flex justify-between items-center pb-4 border-b border-white/5 ${lang === 'ar' ? 'flex-row-reverse text-primary' : 'text-primary'}`}>
+                                    <span className="opacity-80">{t.ladiesTime}</span>
+                                    <span className="font-bold">12.00 PM - 03.00 PM</span>
                                 </div>
-                                <div className="flex justify-between items-center">
-                                    <span className="text-white/60">Evening Session</span>
-                                    <span className="font-bold">03.00 PM - 02.00 AM <span className="text-[10px] text-primary/60 ml-2">(MIXED)</span></span>
+                                <div className={`flex justify-between items-center ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                    <span className="text-white/60">{t.evening}</span>
+                                    <span className={`font-bold ${lang === 'ar' ? 'flex flex-row-reverse gap-2' : ''}`}>
+                                        03.00 PM - 02.00 AM 
+                                        <span className={`text-[10px] text-primary/60 ${lang === 'en' ? 'ml-2' : 'mr-2'}`}>({t.mixed})</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
 
                         <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
-                            <h4 className="text-primary font-bold uppercase tracking-widest mb-4 flex items-center gap-3">
-                                <Clock size={18} /> Sunday
+                            <h4 className={`text-primary font-bold uppercase tracking-widest mb-4 flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                <Clock size={18} /> {t.sunday}
                             </h4>
-                            <div className="flex justify-between items-center">
-                                <span className="text-white/60">Open Hours</span>
-                                <span className="font-bold">05.00 PM - 10.00 PM</span>
+                            <div className={`flex justify-between items-center ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+                                <span className="text-white/60">{t.openHours}</span>
+                                <span className="font-bold font-sans">05.00 PM - 10.00 PM</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <div className="flex-1 relative order-first lg:order-none">
+                <div className="flex-1 relative order-first lg:order-none w-full">
                     <div className="aspect-[4/5] rounded-[3rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                         <img 
                             src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1470&auto=format&fit=crop" 
@@ -413,9 +516,9 @@ const ScheduleSection = () => {
                         href="https://wa.me/971565773090" 
                         target="_blank" 
                         rel="noopener noreferrer"
-                        className="absolute -bottom-6 -right-6 bg-primary p-10 rounded-3xl text-black font-bold rotate-3 hidden md:block hover:scale-110 transition-transform"
+                        className={`absolute -bottom-6 ${lang === 'en' ? '-right-6 rotate-3' : '-left-6 -rotate-3'} bg-primary p-10 rounded-3xl text-black font-bold hidden md:block hover:scale-110 transition-transform z-20`}
                     >
-                        <div className="text-4xl uppercase">Join<br/>Now</div>
+                        <div className="text-4xl uppercase">{t.join.split(' ')[0]}<br/>{t.join.split(' ')[1] || ''}</div>
                     </a>
                 </div>
             </div>
@@ -423,7 +526,8 @@ const ScheduleSection = () => {
     );
 };
 
-const ImageGallery = () => {
+const ImageGallery = ({ lang }: LangProps) => {
+    const t = translations[lang];
     const scrollRef = useRef<HTMLDivElement>(null);
     const images = [
         "/images/gym_1.jpg",
@@ -445,32 +549,32 @@ const ImageGallery = () => {
 
     return (
         <section className="py-24 bg-black overflow-hidden relative">
-            <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
-                <div className="text-center md:text-left">
-                    <h2 className="text-4xl md:text-6xl font-bold uppercase mb-4">Elite <span className="text-primary italic">Facility</span></h2>
-                    <div className="w-24 h-1 bg-primary mx-auto md:mx-0 mb-4" />
-                    <p className="text-white/40 text-xs uppercase tracking-widest font-mono">Manual Gallery Control</p>
+            <div className={`max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-end gap-6 ${lang === 'ar' ? 'md:flex-row-reverse' : ''}`}>
+                <div className={lang === 'ar' ? 'text-right' : 'text-left'}>
+                    <h2 className="text-4xl md:text-6xl font-bold uppercase mb-4">{t.facility.split(' ')[0]} <span className="text-primary italic">{t.facility.split(' ')[1] || ''}</span></h2>
+                    <div className={`w-24 h-1 bg-primary mb-4 ${lang === 'ar' ? 'mr-0 ml-auto' : 'mx-0'}`} />
+                    <p className="text-white/40 text-xs uppercase tracking-widest font-mono">{t.swipe}</p>
                 </div>
                 
-                <div className="flex gap-4 mb-4">
+                <div className={`flex gap-4 mb-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                     <button 
-                        onClick={() => scroll('left')}
+                        onClick={() => scroll(lang === 'en' ? 'left' : 'right')}
                         className="p-4 rounded-full border border-white/10 hover:border-primary hover:text-primary transition-all active:scale-90"
                     >
-                        <ChevronLeft size={24} />
+                        <ChevronLeft size={24} className={lang === 'ar' ? 'rotate-180' : ''} />
                     </button>
                     <button 
-                        onClick={() => scroll('right')}
+                        onClick={() => scroll(lang === 'en' ? 'right' : 'left')}
                         className="p-4 rounded-full border border-white/10 hover:border-primary hover:text-primary transition-all active:scale-90"
                     >
-                        <ChevronRight size={24} />
+                        <ChevronRight size={24} className={lang === 'ar' ? 'rotate-180' : ''} />
                     </button>
                 </div>
             </div>
             
             <div 
                 ref={scrollRef}
-                className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-12 no-scrollbar"
+                className={`flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-12 no-scrollbar ${lang === 'ar' ? 'flex-row-reverse' : ''}`}
             >
                 {images.map((src, i) => (
                     <motion.div 
@@ -487,59 +591,71 @@ const ImageGallery = () => {
                     </motion.div>
                 ))}
             </div>
-            
-            <div className="hidden md:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
-            <div className="hidden md:block absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
         </section>
     );
 };
 
-const Navbar = () => {
-  return (
-    <nav className="fixed top-0 left-0 w-full z-50 px-6 py-8 flex justify-between items-center mix-blend-difference">
-      <div className="flex items-center gap-3">
-        <img src="/images/logo.jpg" alt="SCG Logo" className="w-12 h-12 object-contain rounded-lg border border-white/10" />
-        <span className="text-xl font-bold tracking-tighter uppercase">SMART CITY GYM</span>
-      </div>
-      <div className="hidden md:flex gap-8 text-sm font-mono uppercase tracking-widest">
-        <a href="#training" className="hover:text-primary transition-colors">Training</a>
-        <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
-        <a href="#schedule" className="hover:text-primary transition-colors">Schedule</a>
-        <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
-      </div>
-      <a 
-        href="https://wa.me/971565773090" 
-        target="_blank" 
-        rel="noopener noreferrer"
-        className="bg-white text-black px-6 py-2 rounded-full font-bold text-sm uppercase tracking-tight hover:bg-primary transition-colors"
-      >
-        Join Now
-      </a>
-    </nav>
-  );
+const Navbar = ({ lang, setLang }: { lang: 'en' | 'ar', setLang: (l: 'en' | 'ar') => void }) => {
+    const t = translations[lang];
+    return (
+        <nav className="fixed top-0 left-0 w-full z-[100] px-4 md:px-6 py-6 flex justify-between items-center mix-blend-difference">
+          <div className={`flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse text-right' : ''}`}>
+            <img src="/images/logo.jpg" alt="SCG Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-lg border border-white/10" />
+            <span className="text-lg md:text-xl font-bold tracking-tighter uppercase whitespace-nowrap">{t.brand}</span>
+          </div>
+          
+          <div className={`hidden md:flex gap-8 text-sm font-mono uppercase tracking-widest ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+            <a href="#training" className="hover:text-primary transition-colors">{t.training}</a>
+            <a href="#pricing" className="hover:text-primary transition-colors">{t.pricing}</a>
+            <a href="#schedule" className="hover:text-primary transition-colors">{t.schedule}</a>
+            <a href="#contact" className="hover:text-primary transition-colors">{t.contact}</a>
+          </div>
+          
+          <div className={`flex items-center gap-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
+            <button 
+                onClick={() => setLang(lang === 'en' ? 'ar' : 'en')}
+                className="flex items-center gap-2 p-2 rounded-lg bg-white/10 hover:bg-primary hover:text-black transition-all border border-white/10"
+            >
+                <Languages size={18} />
+                <span className="font-bold text-xs uppercase">{lang === 'en' ? 'AR' : 'EN'}</span>
+            </button>
+            <a 
+                href="https://wa.me/971565773090" 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="bg-white text-black px-4 md:px-6 py-2 rounded-full font-bold text-xs md:text-sm uppercase tracking-tight hover:bg-primary transition-colors whitespace-nowrap"
+            >
+                {t.join}
+            </a>
+          </div>
+        </nav>
+    );
 };
 
-const Contact = () => {
+const Contact = ({ lang }: LangProps) => {
+    const t = translations[lang];
     return (
         <section id="contact" className="py-24 px-6 bg-black border-t border-white/5">
             <div className="max-w-7xl mx-auto">
-                <div className="flex flex-col lg:flex-row gap-16">
-                    <div className="flex-1">
-                        <h2 className="text-4xl md:text-6xl font-bold mb-8">
-                            GET IN <span className="text-primary italic">TOUCH.</span>
+                <div className={`flex flex-col lg:flex-row gap-16 ${lang === 'ar' ? 'lg:flex-row-reverse' : ''}`}>
+                    <div className={`flex-1 ${lang === 'ar' ? 'text-right' : ''}`}>
+                        <h2 className="text-4xl md:text-6xl font-bold mb-8 uppercase">
+                            {t.getInTouch.split(' ')[0]} {t.getInTouch.split(' ')[1] || ''} <span className="text-primary italic">{t.getInTouch.split(' ')[2] || ''}</span>
                         </h2>
-                        <p className="text-white/60 mb-12 text-lg font-sans max-w-md">
-                            Ready to transform your life? Reach out today and let's start your journey toward elite performance.
+                        <p className={`text-white/60 mb-12 text-lg font-sans max-w-md ${lang === 'ar' ? 'mr-auto ml-0' : ''}`}>
+                            {lang === 'en' 
+                                ? "Ready to transform your life? Reach out today and let's start your journey toward elite performance."
+                                : "هل أنت مستعد لتغيير حياتك؟ تواصل معنا اليوم ولنبدأ رحلتك نحو أداء النخبة."}
                         </p>
                         
                         <div className="space-y-8">
                             {[
                                 { icon: <Mail size={20} />, label: "Email", value: "sharfu.scg@gmail.com" },
                                 { icon: <Phone size={20} />, label: "Phone", value: "052 960 4582" },
-                                { icon: <MapPin size={20} />, label: "Location", value: "Tower A1, City Tower, Al Nuaimia 3, Ajman-UAE" },
+                                { icon: <MapPin size={20} />, label: "Location", value: t.location },
                                 { icon: <Zap size={20} />, label: "WhatsApp", value: "056 577 3090" }
                             ].map((item, i) => (
-                                <div key={i} className="flex items-start gap-4">
+                                <div key={i} className={`flex items-start gap-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                     <div className="p-3 bg-white/5 rounded-lg text-primary border border-white/10">
                                         {item.icon}
                                     </div>
@@ -554,12 +670,12 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    <div className="flex-1 flex flex-col gap-6 justify-center">
+                    <div className={`flex-1 flex flex-col gap-6 justify-center ${lang === 'ar' ? 'text-right' : ''}`}>
                         <div className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl text-center">
                             <Zap size={48} className="text-primary mx-auto mb-6 fill-primary/20" />
-                            <h3 className="text-2xl font-bold mb-4 uppercase tracking-wider">Instant Support</h3>
+                            <h3 className="text-2xl font-bold mb-4 uppercase tracking-wider">{t.support}</h3>
                             <p className="text-white/60 mb-8 font-sans">
-                                The fastest way to join or ask questions is via WhatsApp. Our team is ready to assist you.
+                                {t.supportDesc}
                             </p>
                             <a 
                                 href="https://wa.me/971565773090" 
@@ -567,11 +683,10 @@ const Contact = () => {
                                 rel="noopener noreferrer"
                                 className="inline-block w-full bg-primary text-black font-bold py-6 rounded-2xl text-xl uppercase tracking-[0.2em] hover:bg-white transition-all transform active:scale-95 shadow-[0_0_30px_rgba(255,184,0,0.2)]"
                             >
-                                Chat on WhatsApp
+                                {t.chat}
                             </a>
                         </div>
                         
-                        {/* Google Maps Embed */}
                         <div className="bg-white/5 border border-white/10 p-2 rounded-3xl overflow-hidden h-[300px] relative group">
                             <iframe 
                                 width="100%" 
@@ -583,8 +698,8 @@ const Contact = () => {
                                 src="https://maps.google.com/maps?q=Smart%20City%20Gym%20Ajman%20City%20Tower&t=&z=15&ie=UTF8&iwloc=&output=embed"
                                 className="grayscale contrast-125 opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
                             />
-                            <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 pointer-events-none">
-                                <div className="flex items-center gap-2">
+                            <div className={`absolute bottom-4 ${lang === 'en' ? 'right-4' : 'left-4'} bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 pointer-events-none`}>
+                                <div className={`flex items-center gap-2 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                     <MapPin size={14} className="text-primary" />
                                     <span className="text-[10px] font-mono uppercase tracking-widest text-white/60">Tower A1, Ajman</span>
                                 </div>
@@ -598,10 +713,12 @@ const Contact = () => {
 }
 
 export default function App() {
+  const [lang, setLang] = useState<'en' | 'ar'>('en');
+
   return (
-    <main className="relative">
-      <Navbar />
-      <ThreeDHero />
+    <main className={`relative ${lang === 'ar' ? 'font-sans' : ''}`} dir={lang === 'ar' ? 'rtl' : 'ltr'}>
+      <Navbar lang={lang} setLang={setLang} />
+      <ThreeDHero lang={lang} />
       
       {/* Spacer for transition */}
       <div className="h-[20vh] bg-gradient-to-b from-black to-dark" />
@@ -615,25 +732,26 @@ export default function App() {
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}
                 viewport={{ margin: "-100px" }}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center"
+                className={`grid grid-cols-1 lg:grid-cols-2 gap-20 items-center ${lang === 'ar' ? 'lg:flex-row-reverse' : ''}`}
             >
-                <div>
-                   <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-[0.9]">
-                    PUSH YOUR <br/>
-                    <span className="text-primary italic">BOUNDARY.</span>
+                <div className={lang === 'ar' ? 'text-right' : ''}>
+                   <h2 className="text-5xl md:text-7xl font-bold mb-8 leading-[0.9] uppercase">
+                    {lang === 'en' ? 'PUSH YOUR' : 'ادفع'} <br/>
+                    <span className="text-primary italic">{lang === 'en' ? 'BOUNDARY.' : 'حدودك.'}</span>
                    </h2>
-                   <p className="text-xl text-white/60 font-sans mb-12 max-w-xl">
-                    Located in the heart of the city, SMART CITY GYM is not just a gym. 
-                    It's a hub for high-performance athletes and those who dare to be better.
+                   <p className={`text-xl text-white/60 font-sans mb-12 max-w-xl ${lang === 'ar' ? 'mr-auto ml-0' : ''}`}>
+                    {lang === 'en' 
+                        ? "Located in the heart of the city, SMART CITY GYM is not just a gym. It's a hub for high-performance athletes and those who dare to be better."
+                        : "يقع سمارت سيتي جيم في قلب المدينة، وهو ليس مجرد صالة ألعاب رياضية. إنه مركز للرياضيين ذوي الأداء العالي وأولئك الذين يجرؤون على أن يكونوا أفضل."}
                    </p>
-                   <div className="flex gap-4">
+                   <div className={`flex gap-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex-1">
                         <div className="text-3xl font-bold text-primary mb-1">1800</div>
-                        <div className="text-xs uppercase tracking-widest text-white/40">Sq Ft Space</div>
+                        <div className="text-xs uppercase tracking-widest text-white/40">{lang === 'en' ? 'Sq Ft Space' : 'قدم مربع'}</div>
                      </div>
                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex-1">
                         <div className="text-3xl font-bold text-primary mb-1">24/7</div>
-                        <div className="text-xs uppercase tracking-widest text-white/40">Elite Access</div>
+                        <div className="text-xs uppercase tracking-widest text-white/40">{lang === 'en' ? 'Elite Access' : 'دخول النخبة'}</div>
                      </div>
                    </div>
                 </div>
@@ -648,27 +766,24 @@ export default function App() {
         </div>
       </section>
 
-      <Features />
-      <PricingSection />
-      <ScheduleSection />
-      <ImageGallery />
-      <Contact />
+      <Features lang={lang} />
+      <PricingSection lang={lang} />
+      <ScheduleSection lang={lang} />
+      <ImageGallery lang={lang} />
+      <Contact lang={lang} />
       <footer className="py-20 px-6 border-t border-white/10 bg-black">
-        <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
-            <div className="flex items-center gap-4">
+        <div className={`max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 ${lang === 'ar' ? 'md:flex-row-reverse text-right' : ''}`}>
+            <div className={`flex items-center gap-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                 <img src="/images/logo.jpg" alt="SCG Logo" className="w-16 h-16 object-contain rounded-xl border border-white/10" />
                 <div>
-                  <span className="block text-lg font-bold tracking-tighter uppercase leading-none">SMART CITY GYM</span>
-                  <span className="text-[10px] text-primary font-mono tracking-[0.2em] uppercase">Built for Performance</span>
-                </div>
-                <div className="ml-4 pl-4 border-l border-white/10 text-right">
-                  <span className="block text-xl font-bold opacity-40">سمارت سيتي جيم</span>
+                  <span className="block text-lg font-bold tracking-tighter uppercase leading-none">{lang === 'en' ? 'SMART CITY GYM' : 'سمارت سيتي جيم'}</span>
+                  <span className="text-[10px] text-primary font-mono tracking-[0.2em] uppercase">{lang === 'en' ? 'Built for Performance' : 'بني للأداء'}</span>
                 </div>
             </div>
-            <div className="text-white/40 text-[10px] font-mono text-center md:text-left">
-                © 2024 SMART CITY GYM. BUILT FOR PERFORMANCE.
+            <div className="text-white/40 text-[10px] font-mono text-center md:text-left uppercase">
+                © 2024 {lang === 'en' ? 'SMART CITY GYM. BUILT FOR PERFORMANCE.' : 'سمارت سيتي جيم. بني للأداء.'}
             </div>
-            <div className="flex gap-6">
+            <div className={`flex gap-6 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                 <a href="https://instagram.com/SHARAFU_TCR" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Instagram</a>
                 <a href="#" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Twitter</a>
                 <a href="#" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Facebook</a>

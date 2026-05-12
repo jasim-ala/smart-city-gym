@@ -521,7 +521,7 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    <div className="flex-1 flex flex-col justify-center">
+                    <div className="flex-1 flex flex-col gap-6 justify-center">
                         <div className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl text-center">
                             <Zap size={48} className="text-primary mx-auto mb-6 fill-primary/20" />
                             <h3 className="text-2xl font-bold mb-4 uppercase tracking-wider">Instant Support</h3>
@@ -536,9 +536,26 @@ const Contact = () => {
                             >
                                 Chat on WhatsApp
                             </a>
-                            <p className="mt-6 text-[10px] text-white/20 uppercase tracking-[0.3em] font-mono">
-                                Response time: usually under 5 minutes
-                            </p>
+                        </div>
+                        
+                        {/* Google Maps Embed */}
+                        <div className="bg-white/5 border border-white/10 p-2 rounded-3xl overflow-hidden h-[300px] relative group">
+                            <iframe 
+                                width="100%" 
+                                height="100%" 
+                                frameBorder="0" 
+                                scrolling="no" 
+                                marginHeight={0} 
+                                marginWidth={0} 
+                                src="https://maps.google.com/maps?q=Smart%20City%20Gym%20Ajman%20City%20Tower&t=&z=15&ie=UTF8&iwloc=&output=embed"
+                                className="grayscale contrast-125 opacity-70 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-700"
+                            />
+                            <div className="absolute bottom-4 right-4 bg-black/80 backdrop-blur-md px-4 py-2 rounded-lg border border-white/10 pointer-events-none">
+                                <div className="flex items-center gap-2">
+                                    <MapPin size={14} className="text-primary" />
+                                    <span className="text-[10px] font-mono uppercase tracking-widest text-white/60">Tower A1, Ajman</span>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

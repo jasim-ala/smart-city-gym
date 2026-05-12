@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform, useSpring, useMotionValue } from "motion/react";
 import { useRef, useState, useEffect, MouseEvent } from "react";
-import { Shield, Zap, TrendingUp, ChevronDown, Dumbbell, Mail, Phone, MapPin, Clock, Star, Target, Activity } from "lucide-react";
+import { Shield, Zap, TrendingUp, ChevronDown, Dumbbell, Mail, Phone, MapPin, Clock, Star, Target, Activity, ChevronLeft, ChevronRight } from "lucide-react";
 
 const ThreeDHero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -424,6 +424,7 @@ const ScheduleSection = () => {
 };
 
 const ImageGallery = () => {
+    const scrollRef = useRef<HTMLDivElement>(null);
     const images = [
         "/images/gym_1.jpg",
         "/images/gym_2.jpg",
@@ -431,15 +432,46 @@ const ImageGallery = () => {
         "/images/gym_4.jpg",
     ];
 
+    const scroll = (direction: 'left' | 'right') => {
+        if (scrollRef.current) {
+            const { scrollLeft, clientWidth } = scrollRef.current;
+            const scrollTo = direction === 'left' 
+                ? scrollLeft - clientWidth / 2 
+                : scrollLeft + clientWidth / 2;
+            
+            scrollRef.current.scrollTo({ left: scrollTo, behavior: 'smooth' });
+        }
+    };
+
     return (
         <section className="py-24 bg-black overflow-hidden relative">
-            <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
-                <h2 className="text-4xl md:text-6xl font-bold uppercase mb-4">Elite <span className="text-primary italic">Facility</span></h2>
-                <div className="w-24 h-1 bg-primary mx-auto mb-4" />
-                <p className="text-white/40 text-xs uppercase tracking-widest font-mono">Swipe to explore</p>
+            <div className="max-w-7xl mx-auto px-6 mb-16 flex flex-col md:flex-row justify-between items-end gap-6">
+                <div className="text-center md:text-left">
+                    <h2 className="text-4xl md:text-6xl font-bold uppercase mb-4">Elite <span className="text-primary italic">Facility</span></h2>
+                    <div className="w-24 h-1 bg-primary mx-auto md:mx-0 mb-4" />
+                    <p className="text-white/40 text-xs uppercase tracking-widest font-mono">Manual Gallery Control</p>
+                </div>
+                
+                <div className="flex gap-4 mb-4">
+                    <button 
+                        onClick={() => scroll('left')}
+                        className="p-4 rounded-full border border-white/10 hover:border-primary hover:text-primary transition-all active:scale-90"
+                    >
+                        <ChevronLeft size={24} />
+                    </button>
+                    <button 
+                        onClick={() => scroll('right')}
+                        className="p-4 rounded-full border border-white/10 hover:border-primary hover:text-primary transition-all active:scale-90"
+                    >
+                        <ChevronRight size={24} />
+                    </button>
+                </div>
             </div>
             
-            <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-12 no-scrollbar">
+            <div 
+                ref={scrollRef}
+                className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-12 no-scrollbar"
+            >
                 {images.map((src, i) => (
                     <motion.div 
                         key={i} 
@@ -456,7 +488,6 @@ const ImageGallery = () => {
                 ))}
             </div>
             
-            {/* Fade edges - desktop only for easier swiping on mobile */}
             <div className="hidden md:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
             <div className="hidden md:block absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
         </section>

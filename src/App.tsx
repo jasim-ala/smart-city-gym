@@ -469,8 +469,8 @@ const ImageGallery = () => {
 const Navbar = () => {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 px-6 py-8 flex justify-between items-center mix-blend-difference">
-      <div className="flex items-center gap-2">
-        <div className="w-10 h-10 bg-primary flex items-center justify-center rounded-lg font-bold text-black font-display">S</div>
+      <div className="flex items-center gap-3">
+        <img src="/images/logo.jpg" alt="SCG Logo" className="w-12 h-12 object-contain rounded-lg border border-white/10" />
         <span className="text-xl font-bold tracking-tighter uppercase">SMART CITY GYM</span>
       </div>
       <div className="hidden md:flex gap-8 text-sm font-mono uppercase tracking-widest">
@@ -623,7 +623,7 @@ export default function App() {
       <footer className="py-20 px-6 border-t border-white/10 bg-black">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
             <div className="flex items-center gap-4">
-                <div className="w-12 h-12 bg-primary flex items-center justify-center rounded-lg font-bold text-black text-xl">S</div>
+                <img src="/images/logo.jpg" alt="SCG Logo" className="w-16 h-16 object-contain rounded-xl border border-white/10" />
                 <div>
                   <span className="block text-lg font-bold tracking-tighter uppercase leading-none">SMART CITY GYM</span>
                   <span className="text-[10px] text-primary font-mono tracking-[0.2em] uppercase">Built for Performance</span>

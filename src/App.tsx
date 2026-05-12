@@ -787,11 +787,6 @@ export default function App() {
             <div className="text-white/40 text-[10px] font-mono text-center md:text-left uppercase">
                 © 2024 {lang === 'en' ? 'SMART CITY GYM. BUILT FOR PERFORMANCE.' : 'سمارت سيتي جيم. بني للأداء.'}
             </div>
-            <div className={`flex gap-6 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                <a href="https://instagram.com/SHARAFU_TCR" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Instagram</a>
-                <a href="#" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Twitter</a>
-                <a href="#" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Facebook</a>
-            </div>
         </div>
       </footer>
     </main>

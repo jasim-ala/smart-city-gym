@@ -9,8 +9,6 @@ const ThreeDHero = () => {
     offset: ["start start", "end end"],
   });
 
-  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
-
   // Mouse positioning for interaction
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -39,7 +37,6 @@ const ThreeDHero = () => {
       const y = e.clientY - rect.top - rect.height / 2;
       mouseX.set(x);
       mouseY.set(y);
-      setMousePos({ x: Math.round(e.clientX), y: Math.round(e.clientY) });
     }
   };
 
@@ -87,8 +84,7 @@ const ThreeDHero = () => {
                 <div className="flex gap-2 uppercase tracking-tighter">Smart_City_Layer_01</div>
             </div>
             <div className="absolute bottom-10 left-10 flex flex-col gap-1">
-                <div className="flex gap-2">CURSOR_X: {mousePos.x}</div>
-                <div className="flex gap-2">CURSOR_Y: {mousePos.y}</div>
+                <div className="flex gap-2 items-center text-primary/40 uppercase tracking-widest">System_Active</div>
             </div>
         </div>
 
@@ -184,6 +180,38 @@ const ThreeDHero = () => {
       </div>
     </section>
   );
+};
+
+const TrainingBackground = () => {
+    const mouseX = useMotionValue(0);
+    const mouseY = useMotionValue(0);
+    const smoothX = useSpring(mouseX, { stiffness: 50, damping: 30 });
+    const smoothY = useSpring(mouseY, { stiffness: 50, damping: 30 });
+
+    const handleMouseMove = (e: MouseEvent) => {
+        const { currentTarget, clientX, clientY } = e;
+        const rect = currentTarget.getBoundingClientRect();
+        mouseX.set(clientX - rect.left);
+        mouseY.set(clientY - rect.top);
+    };
+
+    return (
+        <div 
+            onMouseMove={handleMouseMove}
+            className="absolute inset-0 z-0 pointer-events-none"
+        >
+            <motion.div 
+                style={{ 
+                    x: smoothX, 
+                    y: smoothY,
+                    translateX: '-50%',
+                    translateY: '-50%'
+                }}
+                className="absolute w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]"
+            />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,184,0,0.05)_0%,transparent_70%)]" />
+        </div>
+    );
 };
 
 const Features = () => {
@@ -388,8 +416,11 @@ export default function App() {
       {/* Spacer for transition */}
       <div className="h-[20vh] bg-gradient-to-b from-black to-dark" />
       
-      <section id="training" className="py-32 px-6">
-        <div className="max-w-7xl mx-auto">
+      <section id="training" className="relative py-32 px-6 overflow-hidden">
+        {/* Interactive Background Effect */}
+        <TrainingBackground />
+        
+        <div className="max-w-7xl mx-auto relative z-10">
             <motion.div 
                 initial={{ opacity: 0 }}
                 whileInView={{ opacity: 1 }}

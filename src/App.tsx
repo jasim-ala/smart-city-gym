@@ -600,7 +600,9 @@ const Navbar = ({ lang, setLang }: { lang: 'en' | 'ar', setLang: (l: 'en' | 'ar'
     return (
         <nav className="fixed top-0 left-0 w-full z-[100] px-4 md:px-6 py-6 flex justify-between items-center mix-blend-difference">
           <div className={`flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse text-right' : ''}`}>
-            <img src="/images/logo.jpg" alt="SCG Logo" className="w-10 h-10 md:w-12 md:h-12 object-contain rounded-lg border border-white/10" />
+        <div className="w-12 h-12 rounded-full bg-white p-1 overflow-hidden flex items-center justify-center border border-white/20">
+            <img src="/images/logo.jpg" alt="SCG Logo" className="w-full h-full object-contain" />
+        </div>
             <span className="text-lg md:text-xl font-bold tracking-tighter uppercase whitespace-nowrap">{t.brand}</span>
           </div>
           
@@ -774,7 +776,9 @@ export default function App() {
       <footer className="py-20 px-6 border-t border-white/10 bg-black">
         <div className={`max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 ${lang === 'ar' ? 'md:flex-row-reverse text-right' : ''}`}>
             <div className={`flex items-center gap-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                <img src="/images/logo.jpg" alt="SCG Logo" className="w-16 h-16 object-contain rounded-xl border border-white/10" />
+                <div className="w-16 h-16 rounded-full bg-white p-1 overflow-hidden flex items-center justify-center border border-white/20">
+                    <img src="/images/logo.jpg" alt="SCG Logo" className="w-full h-full object-contain" />
+                </div>
                 <div>
                   <span className="block text-lg font-bold tracking-tighter uppercase leading-none">{lang === 'en' ? 'SMART CITY GYM' : 'سمارت سيتي جيم'}</span>
                   <span className="text-[10px] text-primary font-mono tracking-[0.2em] uppercase">{lang === 'en' ? 'Built for Performance' : 'بني للأداء'}</span>

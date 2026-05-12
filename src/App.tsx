@@ -112,7 +112,7 @@ const ThreeDHero = () => {
                  className="w-1 h-32 bg-primary origin-top" 
                />
                
-               <h1 className="text-[12vw] font-bold tracking-tight uppercase leading-[0.8] mix-blend-overlay drop-shadow-[0_0_30px_rgba(255,184,0,0.3)] bg-gradient-to-r from-transparent via-primary/50 to-transparent bg-[length:200%_auto] animate-shimmer bg-clip-text">
+               <h1 className="text-[14vw] md:text-[12vw] font-bold tracking-tight uppercase leading-[0.8] mix-blend-overlay drop-shadow-[0_0_30px_rgba(255,184,0,0.3)] bg-gradient-to-r from-transparent via-primary/50 to-transparent bg-[length:200%_auto] animate-shimmer bg-clip-text">
                  <motion.span 
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
@@ -401,7 +401,7 @@ const ScheduleSection = () => {
                     </div>
                 </div>
                 
-                <div className="flex-1 relative">
+                <div className="flex-1 relative order-first lg:order-none">
                     <div className="aspect-[4/5] rounded-[3rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
                         <img 
                             src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1470&auto=format&fit=crop" 
@@ -409,9 +409,14 @@ const ScheduleSection = () => {
                             className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-700"
                         />
                     </div>
-                    <div className="absolute -bottom-6 -right-6 bg-primary p-10 rounded-3xl text-black font-bold rotate-3 hidden md:block">
+                    <a 
+                        href="https://wa.me/971565773090" 
+                        target="_blank" 
+                        rel="noopener noreferrer"
+                        className="absolute -bottom-6 -right-6 bg-primary p-10 rounded-3xl text-black font-bold rotate-3 hidden md:block hover:scale-110 transition-transform"
+                    >
                         <div className="text-4xl uppercase">Join<br/>Now</div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>
@@ -424,44 +429,36 @@ const ImageGallery = () => {
         "/images/gym_2.jpg",
         "/images/gym_3.jpg",
         "/images/gym_4.jpg",
-        "/images/gym_1.jpg",
-        "/images/gym_2.jpg",
-        "/images/gym_3.jpg",
-        "/images/gym_4.jpg",
     ];
 
     return (
         <section className="py-24 bg-black overflow-hidden relative">
             <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
                 <h2 className="text-4xl md:text-6xl font-bold uppercase mb-4">Elite <span className="text-primary italic">Facility</span></h2>
-                <div className="w-24 h-1 bg-primary mx-auto" />
+                <div className="w-24 h-1 bg-primary mx-auto mb-4" />
+                <p className="text-white/40 text-xs uppercase tracking-widest font-mono">Swipe to explore</p>
             </div>
             
-            <div className="relative flex">
-                <motion.div 
-                    animate={{ x: [0, -1600] }}
-                    transition={{ 
-                        duration: 30, 
-                        repeat: Infinity, 
-                        ease: "linear" 
-                    }}
-                    className="flex gap-6 whitespace-nowrap"
-                >
-                    {images.map((src, i) => (
-                        <div key={i} className="w-[400px] h-[600px] rounded-[2rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 flex-shrink-0 border border-white/5">
-                            <img 
-                                src={src} 
-                                alt={`Gym internal ${i}`} 
-                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
-                            />
-                        </div>
-                    ))}
-                </motion.div>
-                
-                {/* Fade edges */}
-                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
-                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
+            <div className="flex overflow-x-auto snap-x snap-mandatory gap-6 px-6 pb-12 no-scrollbar">
+                {images.map((src, i) => (
+                    <motion.div 
+                        key={i} 
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        className="w-[85vw] md:w-[400px] aspect-[4/6] rounded-[2rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 flex-shrink-0 border border-white/5 snap-center"
+                    >
+                        <img 
+                            src={src} 
+                            alt={`Gym internal ${i}`} 
+                            className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                        />
+                    </motion.div>
+                ))}
             </div>
+            
+            {/* Fade edges - desktop only for easier swiping on mobile */}
+            <div className="hidden md:block absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10 pointer-events-none" />
+            <div className="hidden md:block absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10 pointer-events-none" />
         </section>
     );
 };
@@ -479,9 +476,14 @@ const Navbar = () => {
         <a href="#schedule" className="hover:text-primary transition-colors">Schedule</a>
         <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
       </div>
-      <button className="bg-white text-black px-6 py-2 rounded-full font-bold text-sm uppercase tracking-tight hover:bg-primary transition-colors">
+      <a 
+        href="https://wa.me/971565773090" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        className="bg-white text-black px-6 py-2 rounded-full font-bold text-sm uppercase tracking-tight hover:bg-primary transition-colors"
+      >
         Join Now
-      </button>
+      </a>
     </nav>
   );
 };

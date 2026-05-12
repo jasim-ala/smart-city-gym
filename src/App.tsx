@@ -11,7 +11,7 @@ const translations = {
         join: "Join Now",
         training: "Training",
         pricing: "Pricing",
-        schedule: "Schedule",
+        timing: "Timing",
         contact: "Contact",
         services: "Services",
         facility: "Facility",
@@ -53,7 +53,7 @@ const translations = {
         join: "انضم الآن",
         training: "التدريب",
         pricing: "الأسعار",
-        schedule: "الجدول",
+        timing: "التوقيت",
         contact: "اتصل بنا",
         services: "خدماتنا",
         facility: "المرفق",
@@ -609,7 +609,7 @@ const Navbar = ({ lang, setLang }: { lang: 'en' | 'ar', setLang: (l: 'en' | 'ar'
           <div className={`hidden md:flex gap-8 text-sm font-mono uppercase tracking-widest ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
             <a href="#training" className="hover:text-primary transition-colors">{t.training}</a>
             <a href="#pricing" className="hover:text-primary transition-colors">{t.pricing}</a>
-            <a href="#schedule" className="hover:text-primary transition-colors">{t.schedule}</a>
+            <a href="#schedule" className="hover:text-primary transition-colors">{t.timing}</a>
             <a href="#contact" className="hover:text-primary transition-colors">{t.contact}</a>
           </div>
           

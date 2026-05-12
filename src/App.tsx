@@ -136,21 +136,27 @@ const ThreeDHero = () => {
             </div>
             
             <div className="flex flex-col items-center translate-z-20">
-                <motion.span 
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
+                <motion.div 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1 }}
-                    className="font-mono text-primary tracking-[0.5em] text-sm md:text-lg mb-4"
+                    className="flex flex-col items-center gap-2 mb-6"
                 >
-                    EST. 2024 • PREMIUM FACILITY
-                </motion.span>
+                    <span className="font-mono text-primary tracking-[0.5em] text-sm md:text-lg">
+                        LADIES & GENTS
+                    </span>
+                    <div className="h-[1px] w-12 bg-primary/30" />
+                    <span className="font-sans text-white/40 text-xs tracking-[0.3em] uppercase">
+                        COACH: SHARAFU
+                    </span>
+                </motion.div>
                 <motion.p 
                     initial={{ opacity: 0, y: 10 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 1.2 }}
-                    className="text-2xl md:text-4xl font-display font-light text-white/60 uppercase tracking-widest"
+                    className="text-2xl md:text-4xl font-display font-light text-white/60 uppercase tracking-[0.3em]"
                 >
-                    CHANGE YOUR LIFE
+                    CHANGE YOUR LIFESTYLE
                 </motion.p>
             </div>
           </motion.div>
@@ -223,10 +229,10 @@ const Features = () => {
             </div>
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { icon: <Zap className="text-primary" />, title: "AI-Enhanced Cardio", desc: "Treadmills that adapt in real-time to your heart rate and endurance metrics." },
-                    { icon: <Dumbbell className="text-primary" />, title: "Bio-Metric Weights", desc: "Smart resistance machines with integrated form tracking and progressive loading." },
-                    { icon: <Activity className="text-primary" />, title: "Hybrid Core Lab", desc: "Advanced cross-training zone with augmented reality performance feedback." },
-                    { icon: <Shield className="text-primary" />, title: "Growth Coaches", desc: "One-on-one expert guidance powered by your unique biological data." }
+                    { icon: <TrendingUp className="text-primary" />, title: "Weight Management", desc: "Expert weight gaining and loss programs tailored to your body type and goals." },
+                    { icon: <Zap className="text-primary" />, title: "Cardio & Aerobics", desc: "High-intensity group aerobics and cardio training for maximum endurance." },
+                    { icon: <Dumbbell className="text-primary" />, title: "Body Building", desc: "Professional muscle building and competition training for elite performance." },
+                    { icon: <Star className="text-primary" />, title: "Personal Training", desc: "Certified trainers providing one-on-one sessions at gym, home, or park." }
                 ].map((f, i) => (
                     <motion.div 
                         key={i}
@@ -272,38 +278,193 @@ const Features = () => {
     );
 }
 
-const SpecialOffer = () => {
+const PricingSection = () => {
+    const prices = [
+        { period: "One Day", price: "20", sub: "AED" },
+        { period: "One Month", price: "125", sub: "AED" },
+        { period: "Two Months", price: "230", sub: "AED" },
+        { period: "Three Months", price: "325", sub: "AED", popular: true },
+        { period: "Six Months", price: "540", sub: "AED" },
+        { period: "One Year", price: "900", sub: "AED" },
+    ];
+
     return (
-        <section className="py-20 px-6">
-            <motion.div 
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                className="max-w-7xl mx-auto relative overflow-hidden rounded-[3rem] bg-primary p-12 md:p-20 text-black flex flex-col md:flex-row items-center justify-between gap-12"
-            >
-                <div className="relative z-10 text-center md:text-left">
-                    <div className="flex items-center gap-2 mb-6 justify-center md:justify-start">
-                        <Star className="fill-black" />
-                        <span className="font-mono font-bold tracking-[0.3em] text-sm md:text-base">SPECIAL OFFER</span>
+        <section id="pricing" className="py-24 px-6 bg-black relative">
+            <div className="max-w-7xl mx-auto">
+                <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+                    <div>
+                        <h2 className="text-4xl md:text-7xl font-bold uppercase mb-4">Membership <br/><span className="text-primary italic">Plans</span></h2>
+                        <div className="w-24 h-1 bg-primary" />
                     </div>
-                    <h2 className="text-4xl md:text-7xl font-bold mb-6 leading-none uppercase">
-                        FREE <br/><span className="text-8xl md:text-[10rem]">MEMBERSHIP</span>
-                    </h2>
-                    <p className="text-xl md:text-3xl font-bold uppercase opacity-80">
-                        Sign-up for 3 months & <br/>Get 1 month <span className="underline italic">FREE!</span>
-                    </p>
+                    <div className="bg-primary/10 border border-primary/20 p-6 rounded-2xl max-w-sm">
+                        <div className="flex items-center gap-2 mb-2 text-primary">
+                            <Zap size={20} className="fill-primary" />
+                            <span className="font-bold uppercase tracking-wider text-sm">Special Challenge</span>
+                        </div>
+                        <p className="text-white font-bold text-lg uppercase leading-tight">
+                            3 Months Belly Removing Challenge Available Now!
+                        </p>
+                    </div>
                 </div>
-                <div className="relative z-10 w-full md:w-auto">
-                    <button className="w-full md:w-auto bg-black text-white text-2xl font-bold px-12 py-8 rounded-2xl hover:scale-105 transition-transform uppercase tracking-widest shadow-2xl">
-                        Claim Now
-                    </button>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    {prices.map((p, i) => (
+                        <motion.div 
+                            key={i}
+                            initial={{ opacity: 0, y: 20 }}
+                            whileInView={{ opacity: 1, y: 0 }}
+                            transition={{ delay: i * 0.1 }}
+                            className={`relative p-8 rounded-3xl border ${p.popular ? 'border-primary bg-primary/5' : 'border-white/10 bg-white/5'} group overflow-hidden`}
+                        >
+                            {p.popular && (
+                                <div className="absolute top-0 right-0 bg-primary text-black text-[10px] font-bold px-4 py-1 rounded-bl-xl uppercase tracking-widest">
+                                    Most Popular
+                                </div>
+                            )}
+                            <div className="mb-8">
+                                <span className="block text-white/40 text-sm uppercase tracking-widest mb-2 font-mono">{p.period}</span>
+                                <div className="flex items-baseline gap-2">
+                                    <span className="text-5xl font-bold">{p.price}</span>
+                                    <span className="text-primary font-bold uppercase">{p.sub}</span>
+                                </div>
+                            </div>
+                            <ul className="space-y-4 mb-8 text-sm text-white/60">
+                                <li className="flex items-center gap-3">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                    Full Gym Access
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                    Ladies & Gents Mixed
+                                </li>
+                                <li className="flex items-center gap-3">
+                                    <div className="w-1.5 h-1.5 rounded-full bg-primary" />
+                                    Personal Training Option
+                                </li>
+                            </ul>
+                        </motion.div>
+                    ))}
                 </div>
-                {/* Decorative Pattern */}
-                <div className="absolute top-0 right-0 w-1/2 h-full bg-black/5 -skew-x-12 translate-x-1/2" />
-            </motion.div>
+
+                <div className="mt-12 p-8 rounded-3xl bg-gradient-to-r from-primary to-primary/60 text-black flex flex-col md:flex-row items-center justify-between gap-8">
+                    <div>
+                        <h3 className="text-3xl font-bold uppercase mb-2">Special Couple Package</h3>
+                        <p className="font-medium opacity-80 uppercase tracking-wide">Available for all durations. Transform together.</p>
+                    </div>
+                    <Star size={48} className="opacity-20 hidden md:block" />
+                </div>
+            </div>
         </section>
-    )
-}
+    );
+};
+
+const ScheduleSection = () => {
+    return (
+        <section id="schedule" className="py-24 px-6 bg-zinc-950 relative overflow-hidden">
+            <div className="max-w-7xl mx-auto flex flex-col lg:flex-row gap-16 items-center">
+                <div className="flex-1">
+                    <h2 className="text-4xl md:text-6xl font-bold uppercase mb-8">Working <br/><span className="text-primary italic">Hours</span></h2>
+                    <p className="text-white/40 mb-12 max-w-md uppercase tracking-widest text-sm leading-relaxed">
+                        Flexible timings designed to fit your busy lifestyle, including dedicated ladies-only hours for privacy and comfort.
+                    </p>
+                    
+                    <div className="space-y-6">
+                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                            <h4 className="text-primary font-bold uppercase tracking-widest mb-4 flex items-center gap-3">
+                                <Clock size={18} /> Monday to Saturday
+                            </h4>
+                            <div className="space-y-4">
+                                <div className="flex justify-between items-center pb-4 border-b border-white/5">
+                                    <span className="text-white/60">Morning Session</span>
+                                    <span className="font-bold">06.00 AM - 12.00 PM <span className="text-[10px] text-primary/60 ml-2">(MIXED)</span></span>
+                                </div>
+                                <div className="flex justify-between items-center pb-4 border-b border-white/5">
+                                    <span className="text-primary">Ladies Special Time</span>
+                                    <span className="font-bold text-primary">12.00 PM - 03.00 PM</span>
+                                </div>
+                                <div className="flex justify-between items-center">
+                                    <span className="text-white/60">Evening Session</span>
+                                    <span className="font-bold">03.00 PM - 02.00 AM <span className="text-[10px] text-primary/60 ml-2">(MIXED)</span></span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="p-6 rounded-2xl bg-white/5 border border-white/10">
+                            <h4 className="text-primary font-bold uppercase tracking-widest mb-4 flex items-center gap-3">
+                                <Clock size={18} /> Sunday
+                            </h4>
+                            <div className="flex justify-between items-center">
+                                <span className="text-white/60">Open Hours</span>
+                                <span className="font-bold">05.00 PM - 10.00 PM</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div className="flex-1 relative">
+                    <div className="aspect-[4/5] rounded-[3rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700">
+                        <img 
+                            src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1470&auto=format&fit=crop" 
+                            alt="Gym Training"
+                            className="w-full h-full object-cover scale-110 hover:scale-100 transition-transform duration-700"
+                        />
+                    </div>
+                    <div className="absolute -bottom-6 -right-6 bg-primary p-10 rounded-3xl text-black font-bold rotate-3 hidden md:block">
+                        <div className="text-4xl uppercase">Join<br/>Now</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    );
+};
+
+const ImageGallery = () => {
+    const images = [
+        "/images/gym_1.jpg",
+        "/images/gym_2.jpg",
+        "/images/gym_3.jpg",
+        "/images/gym_4.jpg",
+        "/images/gym_1.jpg",
+        "/images/gym_2.jpg",
+        "/images/gym_3.jpg",
+        "/images/gym_4.jpg",
+    ];
+
+    return (
+        <section className="py-24 bg-black overflow-hidden relative">
+            <div className="max-w-7xl mx-auto px-6 mb-16 text-center">
+                <h2 className="text-4xl md:text-6xl font-bold uppercase mb-4">Elite <span className="text-primary italic">Facility</span></h2>
+                <div className="w-24 h-1 bg-primary mx-auto" />
+            </div>
+            
+            <div className="relative flex">
+                <motion.div 
+                    animate={{ x: [0, -1600] }}
+                    transition={{ 
+                        duration: 30, 
+                        repeat: Infinity, 
+                        ease: "linear" 
+                    }}
+                    className="flex gap-6 whitespace-nowrap"
+                >
+                    {images.map((src, i) => (
+                        <div key={i} className="w-[400px] h-[600px] rounded-[2rem] overflow-hidden grayscale hover:grayscale-0 transition-all duration-700 flex-shrink-0 border border-white/5">
+                            <img 
+                                src={src} 
+                                alt={`Gym internal ${i}`} 
+                                className="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+                            />
+                        </div>
+                    ))}
+                </motion.div>
+                
+                {/* Fade edges */}
+                <div className="absolute inset-y-0 left-0 w-32 bg-gradient-to-r from-black to-transparent z-10" />
+                <div className="absolute inset-y-0 right-0 w-32 bg-gradient-to-l from-black to-transparent z-10" />
+            </div>
+        </section>
+    );
+};
 
 const Navbar = () => {
   return (
@@ -314,7 +475,8 @@ const Navbar = () => {
       </div>
       <div className="hidden md:flex gap-8 text-sm font-mono uppercase tracking-widest">
         <a href="#training" className="hover:text-primary transition-colors">Training</a>
-        <a href="#services" className="hover:text-primary transition-colors">Services</a>
+        <a href="#pricing" className="hover:text-primary transition-colors">Pricing</a>
+        <a href="#schedule" className="hover:text-primary transition-colors">Schedule</a>
         <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
       </div>
       <button className="bg-white text-black px-6 py-2 rounded-full font-bold text-sm uppercase tracking-tight hover:bg-primary transition-colors">
@@ -339,10 +501,10 @@ const Contact = () => {
                         
                         <div className="space-y-8">
                             {[
-                                { icon: <Mail size={20} />, label: "Email", value: "hello@smartcitygym.com" },
-                                { icon: <Phone size={20} />, label: "Phone", value: "+1 (555) 000-SCG" },
-                                { icon: <MapPin size={20} />, label: "Location", value: "123 Elite Way, Downtown District" },
-                                { icon: <Clock size={20} />, label: "Timing", value: "6am - 10am | 4pm - 12midnight" }
+                                { icon: <Mail size={20} />, label: "Email", value: "sharfu.scg@gmail.com" },
+                                { icon: <Phone size={20} />, label: "Phone", value: "052 960 4582" },
+                                { icon: <MapPin size={20} />, label: "Location", value: "Tower A1, City Tower, Al Nuaimia 3, Ajman-UAE" },
+                                { icon: <Zap size={20} />, label: "WhatsApp", value: "056 577 3090" }
                             ].map((item, i) => (
                                 <div key={i} className="flex items-start gap-4">
                                     <div className="p-3 bg-white/5 rounded-lg text-primary border border-white/10">
@@ -359,47 +521,25 @@ const Contact = () => {
                         </div>
                     </div>
 
-                    <div className="flex-1 bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl">
-                        <form className="space-y-6" onSubmit={(e) => e.preventDefault()}>
-                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                                <div className="space-y-2">
-                                    <label className="text-xs uppercase tracking-widest text-white/40 font-mono ml-1">Name</label>
-                                    <input 
-                                        type="text" 
-                                        placeholder="John Carter"
-                                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-primary/50 transition-colors font-sans"
-                                    />
-                                </div>
-                                <div className="space-y-2">
-                                    <label className="text-xs uppercase tracking-widest text-white/40 font-mono ml-1">Email</label>
-                                    <input 
-                                        type="email" 
-                                        placeholder="john@example.com"
-                                        className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-primary/50 transition-colors font-sans"
-                                    />
-                                </div>
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-xs uppercase tracking-widest text-white/40 font-mono ml-1">Subject</label>
-                                <select className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-primary/50 transition-colors font-sans appearance-none">
-                                    <option>General Inquiry</option>
-                                    <option>Membership Plans</option>
-                                    <option>Personal Training</option>
-                                    <option>Corporate Partnership</option>
-                                </select>
-                            </div>
-                            <div className="space-y-2">
-                                <label className="text-xs uppercase tracking-widest text-white/40 font-mono ml-1">Message</label>
-                                <textarea 
-                                    rows={4}
-                                    placeholder="Tell us about your goals..."
-                                    className="w-full bg-black/40 border border-white/10 rounded-xl px-4 py-3 focus:outline-none focus:border-primary/50 transition-colors font-sans"
-                                />
-                            </div>
-                            <button className="w-full bg-primary text-black font-bold py-4 rounded-xl uppercase tracking-widest hover:bg-accent transition-all transform active:scale-95">
-                                Send Message
-                            </button>
-                        </form>
+                    <div className="flex-1 flex flex-col justify-center">
+                        <div className="bg-white/5 border border-white/10 p-8 md:p-12 rounded-3xl text-center">
+                            <Zap size={48} className="text-primary mx-auto mb-6 fill-primary/20" />
+                            <h3 className="text-2xl font-bold mb-4 uppercase tracking-wider">Instant Support</h3>
+                            <p className="text-white/60 mb-8 font-sans">
+                                The fastest way to join or ask questions is via WhatsApp. Our team is ready to assist you.
+                            </p>
+                            <a 
+                                href="https://wa.me/971565773090" 
+                                target="_blank" 
+                                rel="noopener noreferrer"
+                                className="inline-block w-full bg-primary text-black font-bold py-6 rounded-2xl text-xl uppercase tracking-[0.2em] hover:bg-white transition-all transform active:scale-95 shadow-[0_0_30px_rgba(255,184,0,0.2)]"
+                            >
+                                Chat on WhatsApp
+                            </a>
+                            <p className="mt-6 text-[10px] text-white/20 uppercase tracking-[0.3em] font-mono">
+                                Response time: usually under 5 minutes
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -438,7 +578,7 @@ export default function App() {
                    </p>
                    <div className="flex gap-4">
                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex-1">
-                        <div className="text-3xl font-bold text-primary mb-1">5000+</div>
+                        <div className="text-3xl font-bold text-primary mb-1">1800</div>
                         <div className="text-xs uppercase tracking-widest text-white/40">Sq Ft Space</div>
                      </div>
                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex-1">
@@ -459,7 +599,9 @@ export default function App() {
       </section>
 
       <Features />
-      <SpecialOffer />
+      <PricingSection />
+      <ScheduleSection />
+      <ImageGallery />
       <Contact />
       <footer className="py-20 px-6 border-t border-white/10 bg-black">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8">
@@ -477,9 +619,9 @@ export default function App() {
                 © 2024 SMART CITY GYM. BUILT FOR PERFORMANCE.
             </div>
             <div className="flex gap-6">
-                {['Instagram', 'Twitter', 'Facebook'].map(s => (
-                    <a key={s} href="#" className="text-xs uppercase tracking-widest hover:text-primary transition-colors">{s}</a>
-                ))}
+                <a href="https://instagram.com/SHARAFU_TCR" target="_blank" rel="noopener noreferrer" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Instagram</a>
+                <a href="#" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Twitter</a>
+                <a href="#" className="text-xs uppercase tracking-widest hover:text-primary transition-colors text-white/40">Facebook</a>
             </div>
         </div>
       </footer>

@@ -9,6 +9,13 @@
   --color-primary: #FFB800; /* Gold from the logo */
   --color-accent: #FFD700;
   --color-dark: #0A0A0A;
+
+  --animate-shimmer: shimmer 3s infinite linear;
+
+  @keyframes shimmer {
+    0% { background-position: -200% 0; }
+    100% { background-position: 200% 0; }
+  }
 }
 
 :root {

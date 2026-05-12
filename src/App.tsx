@@ -1,6 +1,6 @@
-import { motion, useScroll, useTransform, useSpring } from "motion/react";
-import { useRef } from "react";
-import { Shield, Zap, TrendingUp, ChevronDown, Dumbbell, Mail, Phone, MapPin, Clock, Star } from "lucide-react";
+import { motion, useScroll, useTransform, useSpring, useMotionValue } from "motion/react";
+import { useRef, useState, useEffect, MouseEvent } from "react";
+import { Shield, Zap, TrendingUp, ChevronDown, Dumbbell, Mail, Phone, MapPin, Clock, Star, Target, Activity } from "lucide-react";
 
 const ThreeDHero = () => {
   const containerRef = useRef<HTMLDivElement>(null);
@@ -9,68 +9,178 @@ const ThreeDHero = () => {
     offset: ["start start", "end end"],
   });
 
-  const rotateX = useTransform(scrollYProgress, [0, 1], [0, 45]);
-  const scale = useTransform(scrollYProgress, [0, 1], [1, 0.8]);
-  const opacity = useTransform(scrollYProgress, [0, 0.5, 1], [1, 1, 0]);
-  const textY = useTransform(scrollYProgress, [0, 1], [0, -200]);
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 });
 
-  const smoothRotateX = useSpring(rotateX, { stiffness: 100, damping: 30 });
-  const smoothScale = useSpring(scale, { stiffness: 100, damping: 30 });
+  // Mouse positioning for interaction
+  const mouseX = useMotionValue(0);
+  const mouseY = useMotionValue(0);
+  
+  const smoothMouseX = useSpring(mouseX, { stiffness: 150, damping: 20 });
+  const smoothMouseY = useSpring(mouseY, { stiffness: 150, damping: 20 });
+
+  const rotateX = useTransform(smoothMouseY, [-300, 300], [10, -10]);
+  const rotateY = useTransform(smoothMouseX, [-300, 300], [-10, 10]);
+
+  // Zooming the main content towards the camera
+  const scale = useTransform(scrollYProgress, [0, 0.8], [1, 2.5]);
+  const opacity = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
+  const bgScale = useTransform(scrollYProgress, [0, 1], [1, 1.2]);
+  const blur = useTransform(scrollYProgress, [0, 0.5], [0, 10]);
+  
+  const layer1Y = useTransform(scrollYProgress, [0, 1], [0, -500]);
+  const layer2Y = useTransform(scrollYProgress, [0, 1], [0, -250]);
+
+  const smoothScale = useSpring(scale, { stiffness: 50, damping: 20 });
+
+  const handleMouseMove = (e: MouseEvent) => {
+    const rect = containerRef.current?.getBoundingClientRect();
+    if (rect) {
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      mouseX.set(x);
+      mouseY.set(y);
+      setMousePos({ x: Math.round(e.clientX), y: Math.round(e.clientY) });
+    }
+  };
 
   return (
-    <section ref={containerRef} className="h-[200vh] relative bg-black pt-20">
+    <section 
+      ref={containerRef} 
+      onMouseMove={handleMouseMove}
+      className="h-[300vh] relative bg-black cursor-none"
+    >
       <div className="sticky top-0 h-screen flex items-center justify-center overflow-hidden perspective-1000">
+        
+        {/* Background Layer with Depth */}
+        <motion.div 
+          style={{ scale: bgScale, filter: `blur(${blur}px)` }}
+          className="absolute inset-0 z-0"
+        >
+          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1571902943202-507ec2618e8f?q=80&w=1975&auto=format&fit=crop')] bg-cover bg-center opacity-30 grayscale" />
+          <div className="absolute inset-0 bg-radial-gradient from-transparent to-black" />
+          
+          {/* Tech Grid */}
+          <div className="absolute inset-0 opacity-[0.15]" 
+               style={{ backgroundImage: 'linear-gradient(rgba(255, 184, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 184, 0, 0.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+        </motion.div>
+
+        {/* Floating Decorative HUD Elements */}
+        <motion.div style={{ y: layer1Y, rotate: 45 }} className="absolute top-[10%] left-[10%] z-10 opacity-20 hidden lg:flex flex-col gap-2">
+            <Target size={120} className="text-primary animate-pulse" />
+            <div className="font-mono text-[10px] text-primary tracking-widest uppercase">Target.Lock.Status[OK]</div>
+        </motion.div>
+        
+        <motion.div style={{ y: layer2Y }} className="absolute top-[20%] right-[15%] z-10 opacity-20 hidden lg:flex flex-col items-end">
+            <Activity size={80} className="text-primary" />
+            <div className="h-20 w-[2px] bg-primary/40 mt-4 mr-10" />
+            <div className="font-mono text-[10px] text-primary tracking-widest uppercase mt-2">Bio_Metric.Active</div>
+        </motion.div>
+
+        {/* HUD Corners */}
+        <div className="absolute inset-0 p-10 pointer-events-none opacity-20 z-20 font-mono text-[10px] hidden md:block">
+            <div className="absolute top-10 left-10 flex flex-col gap-1">
+                <div className="flex gap-2"><span className="text-primary">LAT:</span> 51.5074° N</div>
+                <div className="flex gap-2"><span className="text-primary">LNG:</span> 0.1278° W</div>
+            </div>
+            <div className="absolute top-10 right-10 flex flex-col gap-1 items-end">
+                <div className="flex gap-2">SYS_OPTIMIZED: <span className="text-primary">100%</span></div>
+                <div className="flex gap-2 uppercase tracking-tighter">Smart_City_Layer_01</div>
+            </div>
+            <div className="absolute bottom-10 left-10 flex flex-col gap-1">
+                <div className="flex gap-2">CURSOR_X: {mousePos.x}</div>
+                <div className="flex gap-2">CURSOR_Y: {mousePos.y}</div>
+            </div>
+        </div>
+
+        {/* Main Hero "Gateway" */}
         <motion.div
            style={{ 
-             rotateX: smoothRotateX, 
              scale: smoothScale,
-             opacity 
+             opacity,
+             rotateX,
+             rotateY
            }}
-           className="relative w-full max-w-5xl aspect-video bg-dark rounded-3xl border border-white/10 overflow-hidden preserve-3d shadow-2xl shadow-primary/20"
+           className="relative z-10 flex flex-col items-center justify-center text-center px-6 preserve-3d"
         >
-          {/* Hero Content Background */}
-          <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1534438327276-14e5300c3a48?q=80&w=1470&auto=format&fit=crop')] bg-cover bg-center opacity-40 grayscale" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent" />
-
-          {/* Interactive Logo Layer */}
           <motion.div 
-            className="absolute inset-0 flex flex-col items-center justify-center z-10"
-            style={{ y: textY }}
+            initial={{ y: 50, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1, ease: "easeOut" }}
+            className="preserve-3d"
           >
-            {/* Logo Silhouette Re-created with SVG if possible, or just bold text */}
-            <div className="relative mb-6">
-                <Dumbbell className="w-24 h-24 text-primary mb-4" />
-                <h1 className="text-8xl md:text-[12rem] font-bold tracking-tighter text-white uppercase leading-none select-none">
-                    SMART CITY
-                </h1>
-                <div className="absolute -top-4 -right-4 bg-primary text-black px-3 py-1 font-mono text-xs font-bold skew-x-12">
-                    GYM
-                </div>
+            <div className="flex items-center justify-center gap-6 mb-8 preserve-3d">
+               <motion.div 
+                 initial={{ scaleY: 0 }}
+                 animate={{ scaleY: 1 }}
+                 transition={{ delay: 0.5, duration: 1 }}
+                 className="w-1 h-32 bg-primary origin-top" 
+               />
+               
+               <h1 className="text-[12vw] font-bold tracking-tight uppercase leading-[0.8] mix-blend-overlay drop-shadow-[0_0_30px_rgba(255,184,0,0.3)] bg-gradient-to-r from-transparent via-primary/50 to-transparent bg-[length:200%_auto] animate-shimmer bg-clip-text">
+                 <motion.span 
+                    initial={{ opacity: 0, x: -20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.2 }}
+                    className="block"
+                 >SMART</motion.span> 
+                 <motion.span 
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.4 }}
+                    className="block translate-x-4"
+                 >CITY <span className="text-primary italic">GYM</span></motion.span>
+               </h1>
+
+               <motion.div 
+                 initial={{ scaleY: 0 }}
+                 animate={{ scaleY: 1 }}
+                 transition={{ delay: 0.5, duration: 1 }}
+                 className="w-1 h-32 bg-primary origin-bottom" 
+               />
             </div>
             
-            <p className="font-display text-xl md:text-2xl text-white/80 max-w-md text-center px-6">
-              GET SMART & LOOK GREAT
-            </p>
-            <div className="mt-4 px-4 py-1 bg-primary text-black font-bold uppercase tracking-[0.2em] text-sm">
-                Change Your Life
+            <div className="flex flex-col items-center translate-z-20">
+                <motion.span 
+                    initial={{ opacity: 0 }}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 1 }}
+                    className="font-mono text-primary tracking-[0.5em] text-sm md:text-lg mb-4"
+                >
+                    EST. 2024 • PREMIUM FACILITY
+                </motion.span>
+                <motion.p 
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 1.2 }}
+                    className="text-2xl md:text-4xl font-display font-light text-white/60 uppercase tracking-widest"
+                >
+                    CHANGE YOUR LIFE
+                </motion.p>
             </div>
-          </motion.div>
-
-          {/* Decorative Layers for Depth */}
-          <motion.div 
-            className="absolute top-10 right-10 z-0 opacity-20 hidden md:block"
-            animate={{ rotate: 360 }}
-            transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
-          >
-            <div className="w-64 h-64 border-2 border-dashed border-primary rounded-full" />
           </motion.div>
         </motion.div>
 
-        {/* Floating Captions */}
-        <div className="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/40 animate-bounce">
-            <span className="text-xs uppercase tracking-widest font-mono">Scroll to explore</span>
-            <ChevronDown size={20} />
-        </div>
+        {/* Dynamic Scanline */}
+        <motion.div 
+            animate={{ top: ['-10%', '110%'] }}
+            transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            className="absolute left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary/30 to-transparent z-30 pointer-events-none"
+        />
+
+        {/* Custom Cursor Circle */}
+        <motion.div 
+            style={{ x: smoothMouseX, y: smoothMouseY, translateX: '-50%', translateY: '-50%' }}
+            className="fixed top-0 left-0 w-8 h-8 border border-primary rounded-full pointer-events-none z-[100] hidden md:block"
+        />
+
+        {/* Scroll Indicator */}
+        <motion.div 
+          style={{ opacity: useTransform(scrollYProgress, [0, 0.1], [1, 0]) }}
+          className="absolute bottom-10 flex flex-col items-center gap-4 text-white/30"
+        >
+            <div className="w-[1px] h-20 bg-gradient-to-b from-white/0 via-white/50 to-white/0" />
+            <span className="text-[10px] uppercase tracking-[0.4em] font-mono">Push Forward</span>
+        </motion.div>
       </div>
     </section>
   );
@@ -78,17 +188,17 @@ const ThreeDHero = () => {
 
 const Features = () => {
     return (
-        <section className="py-24 px-6 bg-black">
+        <section id="services" className="py-24 px-6 bg-black">
             <div className="max-w-7xl mx-auto mb-16 text-center">
                 <h2 className="text-4xl md:text-6xl font-bold mb-4 uppercase">Our <span className="text-primary italic">Services</span></h2>
                 <div className="w-24 h-1 bg-primary mx-auto" />
             </div>
             <div className="max-w-7xl mx-auto grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                 {[
-                    { icon: <Zap className="text-primary" />, title: "Cardio Area", desc: "High-end treadmills and ellipticals for peak endurance." },
-                    { icon: <Dumbbell className="text-primary" />, title: "Weight Area", desc: "Premium free weights and machines for strength building." },
-                    { icon: <Zap className="text-primary" />, title: "Crossfit", desc: "Functional training zone for high-intensity athletes." },
-                    { icon: <Shield className="text-primary" />, title: "Personal Trainer", desc: "One-on-one expert guidance to hit your specific goals." }
+                    { icon: <Zap className="text-primary" />, title: "AI-Enhanced Cardio", desc: "Treadmills that adapt in real-time to your heart rate and endurance metrics." },
+                    { icon: <Dumbbell className="text-primary" />, title: "Bio-Metric Weights", desc: "Smart resistance machines with integrated form tracking and progressive loading." },
+                    { icon: <Activity className="text-primary" />, title: "Hybrid Core Lab", desc: "Advanced cross-training zone with augmented reality performance feedback." },
+                    { icon: <Shield className="text-primary" />, title: "Growth Coaches", desc: "One-on-one expert guidance powered by your unique biological data." }
                 ].map((f, i) => (
                     <motion.div 
                         key={i}
@@ -96,13 +206,37 @@ const Features = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         transition={{ delay: i * 0.1 }}
                         viewport={{ once: true }}
-                        className="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all group text-center"
+                        whileHover="hover"
+                        className="relative p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-primary/50 transition-all group text-center overflow-hidden"
                     >
-                        <div className="mb-4 mx-auto p-4 w-fit rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-all">
-                            {f.icon}
+                        {/* Hover Background Glow */}
+                        <motion.div 
+                            variants={{
+                                hover: { opacity: 0.6 }
+                            }}
+                            initial={{ opacity: 0 }}
+                            className="absolute inset-0 z-0 pointer-events-none transition-opacity duration-500"
+                        >
+                             <motion.div 
+                                animate={{ 
+                                    scale: [1, 1.2, 1],
+                                    rotate: [0, 10, 0],
+                                }}
+                                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+                                className="absolute -inset-10 bg-gradient-to-br from-primary/20 via-transparent to-primary/10 blur-3xl opacity-50"
+                             />
+                        </motion.div>
+
+                        <div className="relative z-10">
+                            <div className="mb-4 mx-auto p-4 w-fit rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-all">
+                                {f.icon}
+                            </div>
+                            <h3 className="text-lg font-bold mb-2 uppercase tracking-wide group-hover:text-primary transition-colors">{f.title}</h3>
+                            <p className="text-white/40 text-sm leading-relaxed font-sans">{f.desc}</p>
                         </div>
-                        <h3 className="text-lg font-bold mb-2 uppercase">{f.title}</h3>
-                        <p className="text-white/40 text-sm leading-relaxed font-sans">{f.desc}</p>
+                        
+                        {/* Decorative Corner Accent */}
+                        <div className="absolute top-0 right-0 w-8 h-8 bg-primary/10 -translate-y-full translate-x-full group-hover:translate-y-0 group-hover:translate-x-0 transition-transform duration-500 rounded-bl-xl" />
                     </motion.div>
                 ))}
             </div>
@@ -151,9 +285,9 @@ const Navbar = () => {
         <span className="text-xl font-bold tracking-tighter uppercase">SMART CITY GYM</span>
       </div>
       <div className="hidden md:flex gap-8 text-sm font-mono uppercase tracking-widest">
-        <a href="#" className="hover:text-primary transition-colors">Training</a>
-        <a href="#" className="hover:text-primary transition-colors">Facility</a>
-        <a href="#" className="hover:text-primary transition-colors">Pricing</a>
+        <a href="#training" className="hover:text-primary transition-colors">Training</a>
+        <a href="#services" className="hover:text-primary transition-colors">Services</a>
+        <a href="#contact" className="hover:text-primary transition-colors">Contact</a>
       </div>
       <button className="bg-white text-black px-6 py-2 rounded-full font-bold text-sm uppercase tracking-tight hover:bg-primary transition-colors">
         Join Now
@@ -254,7 +388,7 @@ export default function App() {
       {/* Spacer for transition */}
       <div className="h-[20vh] bg-gradient-to-b from-black to-dark" />
       
-      <section className="py-32 px-6">
+      <section id="training" className="py-32 px-6">
         <div className="max-w-7xl mx-auto">
             <motion.div 
                 initial={{ opacity: 0 }}

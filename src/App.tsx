@@ -474,18 +474,18 @@ const ScheduleSection = ({ lang }: LangProps) => {
                                 <div className={`flex justify-between items-center pb-4 border-b border-white/5 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                     <span className="text-white/60">{t.morning}</span>
                                     <span className={`font-bold ${lang === 'ar' ? 'flex flex-row-reverse gap-2' : ''}`}>
-                                        06.00 AM - 12.00 PM 
+                                        05.30 AM - 11.30 AM 
                                         <span className={`text-[10px] text-primary/60 ${lang === 'en' ? 'ml-2' : 'mr-2'}`}>({t.mixed})</span>
                                     </span>
                                 </div>
                                 <div className={`flex justify-between items-center pb-4 border-b border-white/5 ${lang === 'ar' ? 'flex-row-reverse text-primary' : 'text-primary'}`}>
                                     <span className="opacity-80">{t.ladiesTime}</span>
-                                    <span className="font-bold">12.00 PM - 03.00 PM</span>
+                                    <span className="font-bold">11.30 AM - 03.30 PM</span>
                                 </div>
                                 <div className={`flex justify-between items-center ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                                     <span className="text-white/60">{t.evening}</span>
                                     <span className={`font-bold ${lang === 'ar' ? 'flex flex-row-reverse gap-2' : ''}`}>
-                                        03.00 PM - 02.00 AM 
+                                        03.30 PM - 02.00 AM 
                                         <span className={`text-[10px] text-primary/60 ${lang === 'en' ? 'ml-2' : 'mr-2'}`}>({t.mixed})</span>
                                     </span>
                                 </div>

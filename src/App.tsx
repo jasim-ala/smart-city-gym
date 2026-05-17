@@ -599,11 +599,12 @@ const Navbar = ({ lang, setLang }: { lang: 'en' | 'ar', setLang: (l: 'en' | 'ar'
     const t = translations[lang];
     return (
         <nav className="fixed top-0 left-0 w-full z-[100] px-4 md:px-6 py-6 flex justify-between items-center mix-blend-difference">
-          <div className={`flex items-center gap-3 ${lang === 'ar' ? 'flex-row-reverse text-right' : ''}`}>
-        <div className="w-12 h-12 rounded-full bg-white p-1 overflow-hidden flex items-center justify-center border border-white/20">
-            <img src="/images/logo.jpg" alt="SCG Logo" className="w-full h-full object-contain" />
-        </div>
-            <span className="text-lg md:text-xl font-bold tracking-tighter uppercase whitespace-nowrap">{t.brand}</span>
+          <div className={`flex items-center ${lang === 'ar' ? 'flex-row-reverse text-right' : ''}`}>
+             <img 
+                 src="/images/logo.jpg" 
+                 alt="Smart City Gym Logo" 
+                 className="h-[50px] w-auto object-contain"
+             />
           </div>
           
           <div className={`hidden md:flex gap-8 text-sm font-mono uppercase tracking-widest ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
@@ -777,7 +778,7 @@ export default function App() {
         <div className={`max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 ${lang === 'ar' ? 'md:flex-row-reverse text-right' : ''}`}>
             <div className={`flex items-center gap-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                 <div className="w-16 h-16 rounded-full bg-white p-1 overflow-hidden flex items-center justify-center border border-white/20">
-                    <img src="/images/logo.jpg" alt="SCG Logo" className="w-full h-full object-contain" />
+                    <img src="/images/logo.jpg" alt="Smart City Gym Logo" className="w-full h-full object-contain" />
                 </div>
                 <div>
                   <span className="block text-lg font-bold tracking-tighter uppercase leading-none">{lang === 'en' ? 'SMART CITY GYM' : 'سمارت سيتي جيم'}</span>

@@ -785,7 +785,7 @@ export default function App() {
                 </div>
             </div>
             <div className="text-white/40 text-[10px] font-mono text-center md:text-left uppercase">
-                © 2024 {lang === 'en' ? 'SMART CITY GYM. BUILT FOR PERFORMANCE.' : 'سمارت سيتي جيم. بني للأداء.'}
+                © 2026 {lang === 'en' ? 'SMART CITY GYM. BUILT FOR PERFORMANCE.' : 'سمارت سيتي جيم. بني للأداء.'}
             </div>
         </div>
       </footer>

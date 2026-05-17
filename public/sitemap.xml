@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- 
+    Replace https://smartcitygym.com with your actual production domain. 
+    Since this is a single-page application (SPA), we only need to index the root URL.
+    The different sections (#training, #pricing, etc.) are handled by the single page.
+  -->
+  <url>
+    <loc>https://smartcitygym.online/</loc>
+    <lastmod>2024-05-17</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+  </url>
+</urlset>

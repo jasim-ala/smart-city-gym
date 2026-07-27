@@ -6,8 +6,8 @@
   --font-display: 'Space Grotesk', sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
-  --color-primary: #FFB800; /* Gold from the logo */
-  --color-accent: #FFD700;
+  --color-primary: #FF4D00; /* Vibrant Orange */
+  --color-accent: #FF6600;
   --color-dark: #0A0A0A;
 
   --animate-shimmer: shimmer 3s infinite linear;

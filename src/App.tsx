@@ -4,7 +4,7 @@ import { Shield, Zap, TrendingUp, ChevronDown, Dumbbell, Mail, Phone, MapPin, Cl
 
 const translations = {
     en: {
-        brand: "SMART CITY GYM",
+        brand: "SFN GYM",
         tagline: "LADIES & GENTS",
         coach: "COACH: SHARAFU",
         motto: "CHANGE YOUR LIFESTYLE",
@@ -43,10 +43,10 @@ const translations = {
         supportDesc: "The fastest way to join or ask questions is via WhatsApp.",
         chat: "Chat on WhatsApp",
         location: "Tower A1, City Tower, Al Nuaimia 3, Ajman-UAE",
-        arBrand: "سمارت سيتي جيم"
+        arBrand: "SFN جيم"
     },
     ar: {
-        brand: "سمارت سيتي جيم",
+        brand: "SFN جيم",
         tagline: "للسيدات والرجال",
         coach: "المدرب: شرفو",
         motto: "غير أسلوب حياتك",
@@ -85,7 +85,7 @@ const translations = {
         supportDesc: "أسرع طريقة للانضمام أو طرح الأسئلة هي عبر الواتساب.",
         chat: "تحدث معنا عبر الواتساب",
         location: "برج A1، سيتي تاور، النعيمية 3، عجمان - الإمارات",
-        arBrand: "سمارت سيتي جيم"
+        arBrand: "SFN جيم"
     }
 };
 
@@ -150,7 +150,7 @@ const ThreeDHero = ({ lang }: LangProps) => {
           
           {/* Tech Grid */}
           <div className="absolute inset-0 opacity-[0.15]" 
-               style={{ backgroundImage: 'linear-gradient(rgba(255, 184, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(255, 184, 0, 0.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
+               style={{ backgroundImage: 'linear-gradient(rgba(116, 230, 0, 0.1) 1px, transparent 1px), linear-gradient(90deg, rgba(116, 230, 0, 0.1) 1px, transparent 1px)', backgroundSize: '40px 40px' }} />
         </motion.div>
 
         {/* Floating Decorative HUD Elements */}
@@ -204,19 +204,19 @@ const ThreeDHero = ({ lang }: LangProps) => {
                  className="w-1 h-32 bg-primary origin-top" 
                />
                
-               <h1 className="text-[14vw] md:text-[12vw] font-bold tracking-tight uppercase leading-[0.8] mix-blend-overlay drop-shadow-[0_0_30px_rgba(255,184,0,0.3)] bg-gradient-to-r from-transparent via-primary/50 to-transparent bg-[length:200%_auto] animate-shimmer bg-clip-text">
+               <h1 className="text-[14vw] md:text-[12vw] font-bold tracking-tight uppercase leading-[0.8] mix-blend-overlay drop-shadow-[0_0_30px_rgba(116,230,0,0.3)] bg-gradient-to-r from-transparent via-primary/50 to-transparent bg-[length:200%_auto] animate-shimmer bg-clip-text">
                  <motion.span 
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.2 }}
                     className="block"
-                 >SMART</motion.span> 
+                 >SFN</motion.span> 
                  <motion.span 
                     initial={{ opacity: 0, x: 20 }}
                     animate={{ opacity: 1, x: 0 }}
                     transition={{ delay: 0.4 }}
                     className="block translate-x-4"
-                 >CITY <span className="text-primary italic">GYM</span></motion.span>
+                 ><span className="text-primary italic">GYM</span></motion.span>
                </h1>
 
                <motion.div 
@@ -307,7 +307,7 @@ const TrainingBackground = () => {
                 }}
                 className="absolute w-[800px] h-[800px] bg-primary/5 rounded-full blur-[120px]"
             />
-            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(255,184,0,0.05)_0%,transparent_70%)]" />
+            <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_50%,rgba(116,230,0,0.05)_0%,transparent_70%)]" />
         </div>
     );
 };
@@ -601,8 +601,8 @@ const Navbar = ({ lang, setLang }: { lang: 'en' | 'ar', setLang: (l: 'en' | 'ar'
         <nav className="fixed top-0 left-0 w-full z-[100] px-4 md:px-6 py-6 flex justify-between items-center mix-blend-difference">
           <div className={`flex items-center ${lang === 'ar' ? 'flex-row-reverse text-right' : ''}`}>
              <img 
-                 src="/images/logo.jpg" 
-                 alt="Smart City Gym Logo" 
+                 src="/images/logo.png" 
+                 alt="SFN Gym Logo" 
                  className="h-[50px] w-auto object-contain"
              />
           </div>
@@ -744,8 +744,8 @@ export default function App() {
                    </h2>
                    <p className={`text-xl text-white/60 font-sans mb-12 max-w-xl ${lang === 'ar' ? 'mr-auto ml-0' : ''}`}>
                     {lang === 'en' 
-                        ? "Located in the heart of the city, SMART CITY GYM is not just a gym. It's a hub for high-performance athletes and those who dare to be better."
-                        : "يقع سمارت سيتي جيم في قلب المدينة، وهو ليس مجرد صالة ألعاب رياضية. إنه مركز للرياضيين ذوي الأداء العالي وأولئك الذين يجرؤون على أن يكونوا أفضل."}
+                        ? "Located in the heart of the city, SFN GYM is not just a gym. It's a hub for high-performance athletes and those who dare to be better."
+                        : "يقع SFN جيم في قلب المدينة، وهو ليس مجرد صالة ألعاب رياضية. إنه مركز للرياضيين ذوي الأداء العالي وأولئك الذين يجرؤون على أن يكونوا أفضل."}
                    </p>
                    <div className={`flex gap-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
                      <div className="p-4 rounded-xl bg-white/5 border border-white/10 flex-1">
@@ -777,16 +777,16 @@ export default function App() {
       <footer className="py-20 px-6 border-t border-white/10 bg-black">
         <div className={`max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center gap-8 ${lang === 'ar' ? 'md:flex-row-reverse text-right' : ''}`}>
             <div className={`flex items-center gap-4 ${lang === 'ar' ? 'flex-row-reverse' : ''}`}>
-                <div className="w-16 h-16 rounded-full bg-white p-1 overflow-hidden flex items-center justify-center border border-white/20">
-                    <img src="/images/logo.jpg" alt="Smart City Gym Logo" className="w-full h-full object-contain" />
+                <div className="w-16 h-16 rounded-full bg-black p-1 overflow-hidden flex items-center justify-center border border-white/20">
+                    <img src="/images/logo.png" alt="SFN Gym Logo" className="w-full h-full object-contain" />
                 </div>
                 <div>
-                  <span className="block text-lg font-bold tracking-tighter uppercase leading-none">{lang === 'en' ? 'SMART CITY GYM' : 'سمارت سيتي جيم'}</span>
+                  <span className="block text-lg font-bold tracking-tighter uppercase leading-none">{lang === 'en' ? 'SFN GYM' : 'SFN جيم'}</span>
                   <span className="text-[10px] text-primary font-mono tracking-[0.2em] uppercase">{lang === 'en' ? 'Built for Performance' : 'بني للأداء'}</span>
                 </div>
             </div>
             <div className="text-white/40 text-[10px] font-mono text-center md:text-left uppercase">
-                © 2026 {lang === 'en' ? 'SMART CITY GYM. BUILT FOR PERFORMANCE.' : 'سمارت سيتي جيم. بني للأداء.'}
+                © 2026 {lang === 'en' ? 'SFN GYM. BUILT FOR PERFORMANCE.' : 'SFN جيم. بني للأداء.'}
             </div>
         </div>
       </footer>
